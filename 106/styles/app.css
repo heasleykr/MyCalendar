@@ -1,0 +1,18 @@
+*{
+    background-color: #eccae7;
+}
+/* Flexbox */
+.container-fluid{
+    display: flex;
+}
+/* 'Flex: 1' means 1 fraction for this div */
+.section{
+    flex: 1;
+}
+#btnShow{
+    margin-top: 3rem;
+    margin-right: 8rem;
+}
+#secForm{
+    border-right: 1px solid white;
+}

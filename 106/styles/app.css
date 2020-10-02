@@ -2,6 +2,13 @@
     background-color: #eccae7;
     color: #686464;
 }
+.hide{
+    /* This will not keep the space for the element when hidden */
+    display: none;
+    
+    /* This will keep space in layout */
+    /* visibility: hidden; */
+}
 /* Main Styling */
 /* Flexbox */
 .container-fluid{

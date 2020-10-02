@@ -22,14 +22,14 @@ function showDetails(){
     // Show details
     if(!visible){
         // Show details class on click
-        UI.$secForm.removeClass('invisible');
+        UI.$secForm.removeClass('hide');
         UI.$btnShow.html( hideIcon + 'Hide Details');
 
         // change boolean
         visible = true;
     }
     else{ //Hide details
-        UI.$secForm.addClass('invisible');
+        UI.$secForm.addClass('hide');
         UI.$btnShow.html(showIcon + 'Show Details');
 
         // change boolean
@@ -86,7 +86,77 @@ function saveTask(){
 
     // clear the form
     clearForm();
+
     console.log(taskList);
+
+
+    //Parsify this Task Object to string. 
+    // var data = JSON.stringify(task);
+    //http request 
+   // save the task on the backend
+   // 'send Task Object to our server database
+   $.ajax({
+       // Url is always a string type
+       url: 'http://fsdi.azurewebsites.net/api/tasks',
+       //POST b/c we're sending and recieving data
+       type: 'POST',
+       // data to be sent. Parse to string. 
+       data: JSON.stringify(task),
+
+       //Always used with 'data' to specify what type
+       contentType: "application/json",
+       success: function(res){
+           //print our server repsponse
+            console.log(res);
+            //show success to user
+            $('#alertSuccess').removeClass('hide');
+
+            //set a timer(mili) to remove 
+            setTimeout(function(){
+                //hide success to user
+                $('#alertSuccess').addClass('hide');
+            } , 3000);
+       },
+       error: function(details){
+           //print if error 
+            console.log("Error :(", details);
+       }
+
+
+   });
+
+   //show success to user
+   $('#alertSuccess').removeClass('hide');
+
+}
+
+// Function to request info, using Ajax, from server
+function testGet(){
+        // Ajax expects an object with configuration 
+    $.ajax({
+
+        //This Url is where the server is AT/Located 
+        url: 'http://restclass.azurewebsites.net/api/test',
+        // You must specifiy type
+        type: 'GET',
+
+        //Paramater is the 'response' from the server. 
+        // Success means you're getting info back from server!!
+        //Conventionally it's a 'res'
+        success: function(response){
+            //Do this on success
+            console.log("req success", response);
+        },
+
+        //Parameter is the Error details!
+        error: function(details){
+            //Do this on Error
+            console.log("Error :(", details);
+        }
+
+
+    });
+
 }
 
 //Function to clear form
